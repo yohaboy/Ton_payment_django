@@ -1,34 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useTonConnectUI, TonConnectUI } from "@tonconnect/ui-react";
+import { useTonConnectUI } from "@tonconnect/ui-react";
+import type { TelegramUser } from "../shared/types";
 
-interface TelegramUser {
-  id: number;
-  first_name?: string;
-  last_name?: string;
-  username?: string;
-  photo_url?: string;
-  auth_date: number;
-  hash: string;
+interface LinkWalletProps {
+  tgUser: TelegramUser | null;
 }
 
-declare global {
-  interface Window {
-    onTelegramAuth: (user: TelegramUser) => void;
-  }
-}
-
-export function LinkWallet() {
-  const [tgUser, setTgUser] = useState<TelegramUser | null>(null);
+export function LinkWallet({ tgUser }: LinkWalletProps) {
   const [ton] = useTonConnectUI();
 
-  useEffect(() => {
-    window.onTelegramAuth = (user: TelegramUser) => setTgUser(user);
-    return () => {
-      window.onTelegramAuth = () => {};
-    };
-  }, []);
-
   const handleLink = async () => {
+    console.log("this is called");
+    console.log(tgUser);
+    console.log(ton.account?.address);
     if (!tgUser || !ton.connected) {
       alert("Please login and connect wallet");
       return;
@@ -36,6 +19,7 @@ export function LinkWallet() {
 
     if (!ton.account?.address) {
       alert("Wallet address not available");
+      console.log("no wallet connected ");
       return;
     }
 
@@ -43,21 +27,21 @@ export function LinkWallet() {
     const msg = `Link: tg ${tgUser.id}, wallet ${wallet}, at ${Date.now()}`;
 
     try {
-      const signed = await ton.signText({ text: msg });
-
-      const res = await fetch("/api/link-wallet/", {
+      console.log("trying...");
+      const res = await fetch("http://127.0.0.1:8000/api/link_wallet", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           telegram: tgUser,
           wallet,
-          signature: signed.signature,
+          signature: msg,
         }),
       });
 
       if (res.ok) {
         alert("Wallet linked!");
       } else {
+        console.log(res);
         alert("Failed to link.");
       }
     } catch (error) {
@@ -68,10 +52,7 @@ export function LinkWallet() {
 
   return (
     <div>
-      {!tgUser && <div id="telegram-container" />}
-      <button onClick={handleLink} disabled={!tgUser || !ton.connected}>
-        Link Telegram + TON Wallet
-      </button>
+      <button onClick={handleLink}>Link Telegram + TON Wallet</button>
     </div>
   );
 }

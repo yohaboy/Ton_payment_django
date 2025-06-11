@@ -1,19 +1,23 @@
 import { LoginButton } from "@telegram-auth/react";
+import type { TelegramUser } from "../shared/types";
 
-function TGLogin() {
+interface TGLoginProps {
+  onAuth: (user: TelegramUser) => void;
+}
+
+function TGLogin({ onAuth }: TGLoginProps) {
   return (
-    <div>
-      <LoginButton
-        botUsername="supaluba_bot"
-        onAuthCallback={(user) => {
-          console.log("Telegram user:", user);
-        }}
-        buttonSize="large"
-        showAvatar={true}
-        cornerRadius={10}
-        lang="en"
-      />
-    </div>
+    <LoginButton
+      botUsername="supaluba_bot"
+      onAuthCallback={(user) => {
+        console.log("Telegram user:", user);
+        onAuth(user);
+      }}
+      buttonSize="large"
+      showAvatar={true}
+      cornerRadius={10}
+      lang="en"
+    />
   );
 }
 
