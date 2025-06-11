@@ -11,11 +11,11 @@ export const SendTransactionButton: React.FC = () => {
       }
 
       await tonConnectUI.sendTransaction({
-        validUntil: Math.floor(Date.now() / 1000) + 300, // 5 minutes
+        validUntil: Math.floor(Date.now() / 1000) + 300,
         messages: [
           {
-            address: "EQABC...123", // Recipient address
-            amount: "1000000000", // 1 TON in nanoTON
+            address: "UQBBDwKtHkZpVNR9TRQxxgEPMz1jexpZ3YU58eYG5de8oXmx",
+            amount: "1000000000",
           },
         ],
       });

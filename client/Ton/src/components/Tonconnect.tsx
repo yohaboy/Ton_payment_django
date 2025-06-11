@@ -8,13 +8,7 @@ const WalletConnection: React.FC = () => {
     <div style={{ padding: "20px" }}>
       <h2>TON Connect Demo</h2>
       <TonConnectButton />
-
-      {wallet && (
-        <div style={{ marginTop: "20px" }}>
-          <p>Connected wallet: {wallet.device.appName}</p>
-          <p>Address: {wallet.account.address}</p>
-        </div>
-      )}
+      {wallet?.device.appName}
     </div>
   );
 };
