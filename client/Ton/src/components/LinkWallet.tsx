@@ -27,10 +27,38 @@ export function LinkWallet({ tgUser }: LinkWalletProps) {
     const msg = `Link: tg ${tgUser.id}, wallet ${wallet}, at ${Date.now()}`;
 
     try {
-      console.log("trying...");
+      function getCookie(name: string) {
+        console.log("called");
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+          const cookies = document.cookie.split(";");
+          for (let cookie of cookies) {
+            cookie = cookie.trim();
+            if (cookie.substring(0, name.length + 1) === name + "=") {
+              cookieValue = decodeURIComponent(
+                cookie.substring(name.length + 1)
+              );
+              console.log("my cookie", cookieValue);
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+
+      await fetch("http://127.0.0.1:8000/api/csrf", {
+        credentials: "include",
+      });
+
+      const token = getCookie("csrftoken");
+
       const res = await fetch("http://127.0.0.1:8000/api/link_wallet", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": token ?? "",
+        },
         body: JSON.stringify({
           telegram: tgUser,
           wallet,
@@ -46,6 +74,7 @@ export function LinkWallet({ tgUser }: LinkWalletProps) {
       }
     } catch (error) {
       console.error("Error during linking:", error);
+      console.log("here is the error :", error);
       alert("An error occurred during linking.");
     }
   };
