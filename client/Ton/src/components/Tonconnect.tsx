@@ -5,7 +5,7 @@ const WalletConnection: React.FC = () => {
   const wallet = useTonWallet();
 
   return (
-    <div className="bg-white shadow-xl rounded-2xl p-6 text-center border border-gray-200">
+    <div className="bg-black shadow-lg border border-gray-200 rounded-2xl p-8 text-center">
       <h2 className="text-2xl font-semibold mb-4 text-gray-800">
         TON Connect Demo
       </h2>
