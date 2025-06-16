@@ -1,5 +1,6 @@
 import { useTonConnectUI } from "@tonconnect/ui-react";
 import type { TelegramUser } from "../shared/types";
+import { Address } from "@ton/ton";
 
 interface LinkWalletProps {
   tgUser: TelegramUser | null;
@@ -24,7 +25,12 @@ export function LinkWallet({ tgUser }: LinkWalletProps) {
     }
 
     const wallet = ton.account.address;
-    const msg = `Link: tg ${tgUser.id}, wallet ${wallet}, at ${Date.now()}`;
+    const converted_adress = Address.parse(wallet).toString({
+      urlSafe: true,
+    });
+    const msg = `Link: tg ${
+      tgUser.id
+    }, wallet ${converted_adress}, at ${Date.now()}`;
 
     try {
       function getCookie(name: string) {
@@ -61,7 +67,7 @@ export function LinkWallet({ tgUser }: LinkWalletProps) {
         },
         body: JSON.stringify({
           telegram: tgUser,
-          wallet,
+          wallet: converted_adress,
           signature: msg,
         }),
       });

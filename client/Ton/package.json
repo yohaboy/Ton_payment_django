@@ -11,11 +11,15 @@
   },
   "dependencies": {
     "@telegram-auth/react": "^1.0.4",
+    "@ton/core": "^0.61.0",
+    "@ton/ton": "^15.2.1",
     "@tonconnect/sdk": "^3.1.0",
     "@tonconnect/ui": "^2.1.0",
     "@tonconnect/ui-react": "^2.1.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "tonweb": "^0.0.66",
+    "vite-plugin-node-polyfills": "^0.23.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
