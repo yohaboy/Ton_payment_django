@@ -5,10 +5,16 @@ const WalletConnection: React.FC = () => {
   const wallet = useTonWallet();
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>TON Connect Demo</h2>
+    <div className="bg-white shadow-xl rounded-2xl p-6 text-center border border-gray-200">
+      <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+        TON Connect Demo
+      </h2>
       <TonConnectButton />
-      {wallet?.device.appName}
+      {wallet?.device.appName && (
+        <p className="mt-4 text-sm text-gray-500">
+          Connected: {wallet.device.appName}
+        </p>
+      )}
     </div>
   );
 };

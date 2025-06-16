@@ -7,7 +7,7 @@ function WalletConnector() {
   const [tgUser, setTgUser] = useState<TelegramUser | null>(null);
 
   return (
-    <div>
+    <div className="bg-white shadow-xl rounded-2xl p-6 border border-gray-200">
       <TGLogin onAuth={setTgUser} />
       <LinkWallet tgUser={tgUser} />
     </div>

@@ -9,9 +9,13 @@ const manifestUrl =
 function App() {
   return (
     <TonConnectUIProvider manifestUrl={manifestUrl}>
-      <WalletConnection />
-      <SendTransactionButton />
-      <WalletConnector />
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-white p-6">
+        <div className="w-full max-w-md space-y-6">
+          <WalletConnection />
+          <SendTransactionButton />
+          <WalletConnector />
+        </div>
+      </div>
     </TonConnectUIProvider>
   );
 }

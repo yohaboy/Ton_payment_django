@@ -28,5 +28,12 @@ export const SendTransactionButton: React.FC = () => {
     }
   };
 
-  return <button onClick={handleSend}>Send 1 TON</button>;
+  return (
+    <button
+      onClick={handleSend}
+      className="w-full py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-md transition-colors font-medium"
+    >
+      Send 1 TON
+    </button>
+  );
 };
