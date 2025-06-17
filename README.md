@@ -18,7 +18,7 @@ A simple Django template project that demonstrates how to securely connect a use
 1️⃣ **Clone the repository**
 
     git clone https://github.com/yohaboy/Ton_payment_django.git
-    cd Ton_payment_django
+    cd TON-Django
 
 2️⃣ **Create a virtual environment**
 
@@ -60,9 +60,9 @@ Create a `.env` or update `settings.py` with your:
 
 | Method | Endpoint | Description |
 | ------ | -------- | ----------- |
-| GET | /connect/telegram/ | Initiate Telegram connection |
-| POST | /verify/telegram/ | Verify Telegram hash |
-| POST | /link/ton/ | Link TON wallet to verified Telegram user |
+| GET | /api/csrf | obtain csrf token |
+| POST | /api/verify_telegram_auth| Verify Telegram hash |
+| POST | /api/link_wallet | Link TON wallet to verified Telegram user |
 
 (Actual routes may vary — adjust accordingly)
 
