@@ -85,13 +85,6 @@ Create a `.env` or update `settings.py` with your:
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License.
-See LICENSE for details.
-
----
-
 ## 🙌 Author
 
 Made with ❤️ by John
